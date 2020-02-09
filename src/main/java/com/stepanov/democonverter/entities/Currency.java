@@ -15,18 +15,20 @@ public class Currency {
     private String name;
     private int nominal;
     private double value;
+    private LocalDate loadDate;
 
 
     public Currency() {
     }
 
-    public Currency(String Identity,String charCode, String name, int nominal, double value) {
+    public Currency(String Identity, String charCode, String name, int nominal, double value, LocalDate loadDate) {
 
         this.Identity = Identity;
         this.name = name;
         this.charCode = charCode;
         this.nominal = nominal;
         this.value = value;
+        this.loadDate = loadDate;
     }
 
 
@@ -72,6 +74,14 @@ public class Currency {
 
     public void setValue(Double value) {
         this.value = value;
+    }
+
+    public LocalDate getLoadDate() {
+        return loadDate;
+    }
+
+    public void setLoadDate(LocalDate loadDate) {
+        this.loadDate = loadDate;
     }
 }
 

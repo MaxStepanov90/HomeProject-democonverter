@@ -1,20 +1,15 @@
 package com.stepanov.democonverter.util;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 
-public abstract  class Utils {
+public class Utils {
 
-    public static boolean beforeToday(Date date) {
-        if(date == null)
+    public static boolean afterToday(LocalDate loadDate) {
+        if (loadDate == null)
             return false;
 
-        Calendar givenDate = Calendar.getInstance();
-        givenDate.setTime(date);
+        LocalDate newDate = LocalDate.now();
 
-        Calendar now = Calendar.getInstance();
-        now.set(Calendar.HOUR, 0);
-
-        return givenDate.before(now);
+        return newDate.isAfter(loadDate);
     }
 }

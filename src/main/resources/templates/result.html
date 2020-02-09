@@ -13,12 +13,9 @@
     <title>Конвертер валют</title>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
-    <h5><span class="navbar-text text-light mr-sm-2" th:inline="text">Привет [[${#httpServletRequest.remoteUser}]]!</span></h5>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit" class="btn btn-link text-light" ><h5>Выйти</h5></button>
-    </form>
-</nav>
+
+<div th:insert="fragments/navbar"></div>
+
 <div class="container jumbotron text-center my-5 ">
     <div class="row justify-content-center align-items-center">
 

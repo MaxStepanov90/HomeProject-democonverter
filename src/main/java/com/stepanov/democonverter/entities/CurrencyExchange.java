@@ -1,9 +1,6 @@
 package com.stepanov.democonverter.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -19,14 +16,16 @@ public class CurrencyExchange {
     private double sourceCount;
     private double targetCount;
     private LocalDate creationDate;
-    private String userLogin;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
     public CurrencyExchange() {
     }
 
     public CurrencyExchange(String sourceCharCode, String targetCharCod, String sourceName, String targetName, double sourceCount,
-                            double targetCount, LocalDate creationDate, String userLogin) {
+                            double targetCount, LocalDate creationDate, User user) {
 
         this.sourceCharCode = sourceCharCode;
         this.targetCharCode = targetCharCod;
@@ -35,7 +34,7 @@ public class CurrencyExchange {
         this.sourceCount = sourceCount;
         this.targetCount = targetCount;
         this.creationDate = creationDate;
-        this.userLogin = userLogin;
+        this.user = user;
     }
 
 
@@ -103,11 +102,11 @@ public class CurrencyExchange {
         this.creationDate = creationDate;
     }
 
-    public String getUserLogin() {
-        return userLogin;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

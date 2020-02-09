@@ -21,10 +21,9 @@ public class CurrencyServiceImpl implements CurrencyService {
     public Currency getCurrencyByCharCode(String charCode) {
         return currencyRepository.findByCharCode(charCode);
     }
-
+    @Override
     public List<Currency> getCurrencies() {
         return currencyRepository.findAll();
     }
-
 }
 

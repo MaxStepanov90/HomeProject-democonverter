@@ -3,7 +3,6 @@ package com.stepanov.democonverter.controllers;
 import com.stepanov.democonverter.entities.CurrencyExchange;
 import com.stepanov.democonverter.service.CurrencyExchangeServiceImpl;
 import com.stepanov.democonverter.service.CurrencyServiceImpl;
-import com.stepanov.democonverter.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,14 +18,11 @@ public class CurrencyController {
 
     private final CurrencyServiceImpl currencyService;
     private final CurrencyExchangeServiceImpl currencyExchangeService;
-    private final UserServiceImpl userService;
 
     @Autowired
-    public CurrencyController(CurrencyServiceImpl currencyService, CurrencyExchangeServiceImpl currencyExchangeService,
-                              UserServiceImpl userService) {
+    public CurrencyController(CurrencyServiceImpl currencyService, CurrencyExchangeServiceImpl currencyExchangeService) {
         this.currencyService = currencyService;
         this.currencyExchangeService = currencyExchangeService;
-        this.userService = userService;
     }
 
     @GetMapping("/")

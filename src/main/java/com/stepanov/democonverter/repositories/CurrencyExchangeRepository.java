@@ -10,4 +10,5 @@ import java.util.List;
 public interface CurrencyExchangeRepository extends JpaRepository<CurrencyExchange,Long> {
 
     List<CurrencyExchange> findByUserLogin(String login);
+
 }
