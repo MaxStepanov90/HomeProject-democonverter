@@ -57,15 +57,15 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
             double convertCurs = ((firstCurrency.getNominal()) * (firstCurrency.getValue()) / ((secondCurrency.getNominal()) * (secondCurrency.getValue())));
             double targetCount = Math.round((convertCurs * sourceCount) * 100) / 100.0d;
 
-            newCurrencyExchange = new CurrencyExchange.CurrencyExchangeBuilder()
-                    .setSourceCharCode(firstCurrency.getCharCode())
-                    .setTargetCharCode(secondCurrency.getCharCode())
-                    .setSourceName(firstCurrency.getName())
-                    .setTargetName(secondCurrency.getName())
-                    .setSourceCount(sourceCount)
-                    .setTargetCount(targetCount)
-                    .setCreationDate(LocalDate.now())
-                    .setUser(userRepository.findByLogin(login))
+            newCurrencyExchange = CurrencyExchange.builder()
+                    .sourceCharCode(firstCurrency.getCharCode())
+                    .targetCharCode(secondCurrency.getCharCode())
+                    .sourceName(firstCurrency.getName())
+                    .targetName(secondCurrency.getName())
+                    .sourceCount(sourceCount)
+                    .targetCount(targetCount)
+                    .creationDate(LocalDate.now())
+                    .user(userRepository.findByLogin(login))
                     .build();
 
             currencyExchangeRepository.save(newCurrencyExchange);

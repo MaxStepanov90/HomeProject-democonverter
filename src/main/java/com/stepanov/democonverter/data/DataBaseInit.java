@@ -17,6 +17,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -81,6 +84,7 @@ public class DataBaseInit {
     private Document loadDocument(String url) throws ParserConfigurationException, IOException, SAXException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
+        CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
         URL xmlUrl = new URL((url));
         InputStream in = xmlUrl.openStream();
         return builder.parse(in);
