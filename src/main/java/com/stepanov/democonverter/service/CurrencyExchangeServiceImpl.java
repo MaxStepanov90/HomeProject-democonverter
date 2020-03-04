@@ -35,8 +35,8 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
     @Override
     public List<CurrencyExchangeDto> getHistoryForCurrentUser(String login) {
-         List<CurrencyExchange> currencyExchangeDtoList = currencyExchangeRepository.findByUserLogin(login);
-         return CurrencyExchangeMapper.CURRENCY_EXCHANGE_MAPPER.fromCurrencyExchangeList(currencyExchangeDtoList);
+        List<CurrencyExchange> currencyExchangeDtoList = currencyExchangeRepository.findByUserLogin(login);
+        return CurrencyExchangeMapper.CURRENCY_EXCHANGE_MAPPER.fromCurrencyExchangeList(currencyExchangeDtoList);
     }
 
     @Override
@@ -52,28 +52,37 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
             } catch (IOException | SAXException | ParserConfigurationException | ParseException e) {
                 e.printStackTrace();
             }
-
         } else {
-            Currency firstCurrency = currencyService.getCurrencyByCharCode(sourceName);
-            Currency secondCurrency = currencyService.getCurrencyByCharCode(targetName);
-
-            double convertCurs = ((firstCurrency.getNominal()) * (firstCurrency.getValue()) / ((secondCurrency.getNominal()) * (secondCurrency.getValue())));
-            double targetCount = Math.round((convertCurs * sourceCount) * 100) / 100.0d;
-
-            newCurrencyExchange = CurrencyExchange.builder()
-                    .sourceCharCode(firstCurrency.getCharCode())
-                    .targetCharCode(secondCurrency.getCharCode())
-                    .sourceName(firstCurrency.getName())
-                    .targetName(secondCurrency.getName())
-                    .sourceCount(sourceCount)
-                    .targetCount(targetCount)
-                    .creationDate(LocalDate.now())
-                    .user(userRepository.findByLogin(login))
-                    .build();
-
+            newCurrencyExchange = getNewCurrencyExchange(sourceName, targetName, sourceCount, login);
             currencyExchangeRepository.save(newCurrencyExchange);
         }
         return CurrencyExchangeMapper.CURRENCY_EXCHANGE_MAPPER.fromCurrencyExchange(newCurrencyExchange);
+    }
+
+    @Override
+    public CurrencyExchange getNewCurrencyExchange(String sourceName, String targetName, double sourceCount, String login) {
+
+        Currency firstCurrency = currencyService.getCurrencyByCharCode(sourceName);
+        Currency secondCurrency = currencyService.getCurrencyByCharCode(targetName);
+
+        return CurrencyExchange.builder()
+                .sourceCharCode(firstCurrency.getCharCode())
+                .targetCharCode(secondCurrency.getCharCode())
+                .sourceName(firstCurrency.getName())
+                .targetName(secondCurrency.getName())
+                .sourceCount(sourceCount)
+                .targetCount(getTargetCount(firstCurrency, secondCurrency, sourceCount))
+                .creationDate(LocalDate.now())
+                .user(userRepository.findByLogin(login))
+                .build();
+    }
+
+    @Override
+    public double getTargetCount(Currency firstCurrency, Currency secondCurrency, double sourceCount) {
+
+        double convertCurs = ((firstCurrency.getNominal()) * (firstCurrency.getValue()) /
+                ((secondCurrency.getNominal()) * (secondCurrency.getValue())));
+        return Math.round((sourceCount * convertCurs) * 100) / 100.0d;
     }
 }
 

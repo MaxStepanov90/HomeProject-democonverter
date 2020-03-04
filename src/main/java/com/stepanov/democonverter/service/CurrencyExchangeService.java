@@ -1,6 +1,8 @@
 package com.stepanov.democonverter.service;
 
 import com.stepanov.democonverter.dto.CurrencyExchangeDto;
+import com.stepanov.democonverter.entities.Currency;
+import com.stepanov.democonverter.entities.CurrencyExchange;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -14,4 +16,6 @@ public interface CurrencyExchangeService {
             throws SAXException, ParserConfigurationException, ParseException, IOException;
 
     List<CurrencyExchangeDto> getHistoryForCurrentUser(String login);
+    CurrencyExchange getNewCurrencyExchange(String sourceName, String targetName, double sourceCount, String login);
+    double getTargetCount(Currency firstCurrency, Currency secondCurrency, double sourceCount);
 }
