@@ -1,5 +1,7 @@
 package com.stepanov.democonverter.controllers;
 
+import com.stepanov.democonverter.dto.CurrencyExchangeDto;
+import com.stepanov.democonverter.entities.Currency;
 import com.stepanov.democonverter.entities.CurrencyExchange;
 import com.stepanov.democonverter.service.CurrencyExchangeServiceImpl;
 import com.stepanov.democonverter.service.CurrencyServiceImpl;
@@ -29,9 +31,10 @@ public class CurrencyController {
     public String getCurrencies(Model model, Principal user) {
         List<CurrencyExchange> currencyExchangeList = currencyExchangeService.getHistoryForCurrentUser(user.getName());
         if (!currencyExchangeList.isEmpty()) {
-            model.addAttribute("historycurrencyexchange", currencyExchangeList);
+            model.addAttribute("historycurrencyexchange", currencyExchangeService.toCurrencyExchangeDtoList(currencyExchangeList));
         }
-        model.addAttribute("currencies", currencyService.getCurrencies());
+        List<Currency>currencyList = currencyService.getCurrencies();
+        model.addAttribute("currencies", currencyService.toCurrencyDtoList(currencyList));
         return "convert";
     }
 
@@ -42,8 +45,9 @@ public class CurrencyController {
                                       @RequestParam double sourceCount) {
         String userLogin = user.getName();
         CurrencyExchange currencyExchange = currencyExchangeService.createCurrencyExchange(sourceName, targetName, sourceCount, userLogin);
-        model.addAttribute("currencyexchanges", currencyExchange);
-        model.addAttribute("historycurrencyexchange", currencyExchangeService.getHistoryForCurrentUser(userLogin));
+        List<CurrencyExchange> currencyExchangeList = currencyExchangeService.getHistoryForCurrentUser(userLogin);
+        model.addAttribute("currencyexchanges", currencyExchangeService.toCurrencyExchangeDto(currencyExchange));
+        model.addAttribute("historycurrencyexchange",currencyExchangeService.toCurrencyExchangeDtoList(currencyExchangeList) );
         return "result";
     }
 
