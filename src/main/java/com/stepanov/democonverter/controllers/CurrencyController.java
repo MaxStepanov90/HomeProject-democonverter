@@ -1,8 +1,6 @@
 package com.stepanov.democonverter.controllers;
 
 import com.stepanov.democonverter.dto.CurrencyExchangeDto;
-import com.stepanov.democonverter.entities.Currency;
-import com.stepanov.democonverter.entities.CurrencyExchange;
 import com.stepanov.democonverter.service.CurrencyExchangeServiceImpl;
 import com.stepanov.democonverter.service.CurrencyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +27,12 @@ public class CurrencyController {
 
     @GetMapping("/")
     public String getCurrencies(Model model, Principal user) {
-        List<CurrencyExchange> currencyExchangeList = currencyExchangeService.getHistoryForCurrentUser(user.getName());
-        if (!currencyExchangeList.isEmpty()) {
-            model.addAttribute("historycurrencyexchange", currencyExchangeService.toCurrencyExchangeDtoList(currencyExchangeList));
+        List<CurrencyExchangeDto> currencyExchangeDtoList = currencyExchangeService.getHistoryForCurrentUser(user.getName());
+
+        if (!currencyExchangeDtoList.isEmpty()) {
+            model.addAttribute("historycurrencyexchange", currencyExchangeDtoList);
         }
-        List<Currency>currencyList = currencyService.getCurrencies();
-        model.addAttribute("currencies", currencyService.toCurrencyDtoList(currencyList));
+        model.addAttribute("currencies", (currencyService.getCurrencies()));
         return "convert";
     }
 
@@ -44,12 +42,10 @@ public class CurrencyController {
                                       @RequestParam String targetName,
                                       @RequestParam double sourceCount) {
         String userLogin = user.getName();
-        CurrencyExchange currencyExchange = currencyExchangeService.createCurrencyExchange(sourceName, targetName, sourceCount, userLogin);
-        List<CurrencyExchange> currencyExchangeList = currencyExchangeService.getHistoryForCurrentUser(userLogin);
-        model.addAttribute("currencyexchanges", currencyExchangeService.toCurrencyExchangeDto(currencyExchange));
-        model.addAttribute("historycurrencyexchange",currencyExchangeService.toCurrencyExchangeDtoList(currencyExchangeList) );
+        CurrencyExchangeDto currencyExchangeDto = currencyExchangeService.createCurrencyExchange(sourceName, targetName, sourceCount, userLogin);
+        List<CurrencyExchangeDto> currencyExchangeDtoList = currencyExchangeService.getHistoryForCurrentUser(userLogin);
+        model.addAttribute("currencyexchanges", currencyExchangeDto);
+        model.addAttribute("historycurrencyexchange", currencyExchangeDtoList);
         return "result";
     }
-
-
 }

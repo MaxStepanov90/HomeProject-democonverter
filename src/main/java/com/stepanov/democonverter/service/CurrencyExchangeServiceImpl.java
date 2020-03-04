@@ -4,6 +4,7 @@ import com.stepanov.democonverter.data.DataBaseInit;
 import com.stepanov.democonverter.dto.CurrencyExchangeDto;
 import com.stepanov.democonverter.entities.Currency;
 import com.stepanov.democonverter.entities.CurrencyExchange;
+import com.stepanov.democonverter.mapper.CurrencyExchangeMapper;
 import com.stepanov.democonverter.repositories.CurrencyExchangeRepository;
 import com.stepanov.democonverter.repositories.UserRepository;
 import com.stepanov.democonverter.util.Utils;
@@ -16,7 +17,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
@@ -34,12 +34,13 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
     }
 
     @Override
-    public List<CurrencyExchange> getHistoryForCurrentUser(String login) {
-        return currencyExchangeRepository.findByUserLogin(login);
+    public List<CurrencyExchangeDto> getHistoryForCurrentUser(String login) {
+         List<CurrencyExchange> currencyExchangeDtoList = currencyExchangeRepository.findByUserLogin(login);
+         return CurrencyExchangeMapper.CURRENCY_EXCHANGE_MAPPER.fromCurrencyExchangeList(currencyExchangeDtoList);
     }
 
     @Override
-    public CurrencyExchange createCurrencyExchange(String sourceName, String targetName, double sourceCount, String login) {
+    public CurrencyExchangeDto createCurrencyExchange(String sourceName, String targetName, double sourceCount, String login) {
 
         CurrencyExchange newCurrencyExchange = new CurrencyExchange();
         LocalDate currencyLoadDate = (currencyService.getCurrencyByCharCode(sourceName)).getLoadDate();
@@ -72,25 +73,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
             currencyExchangeRepository.save(newCurrencyExchange);
         }
-        return newCurrencyExchange;
-    }
-
-    public CurrencyExchangeDto toCurrencyExchangeDto(CurrencyExchange currencyExchange) {
-        return CurrencyExchangeDto.builder()
-                .id(currencyExchange.getId())
-                .sourceCharCode(currencyExchange.getSourceCharCode())
-                .targetCharCode(currencyExchange.getTargetCharCode())
-                .sourceName(currencyExchange.getSourceName())
-                .targetName(currencyExchange.getTargetName())
-                .sourceCount(currencyExchange.getSourceCount())
-                .targetCount(currencyExchange.getTargetCount())
-                .creationDate(currencyExchange.getCreationDate())
-                .user(currencyExchange.getUser())
-                .build();
-    }
-
-    public List<CurrencyExchangeDto> toCurrencyExchangeDtoList(List<CurrencyExchange> currencyExchangeList) {
-        return currencyExchangeList.stream().map(this::toCurrencyExchangeDto).collect(Collectors.toList());
+        return CurrencyExchangeMapper.CURRENCY_EXCHANGE_MAPPER.fromCurrencyExchange(newCurrencyExchange);
     }
 }
 
