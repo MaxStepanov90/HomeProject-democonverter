@@ -2,6 +2,7 @@ package com.stepanov.democonverter.data;
 
 import com.stepanov.democonverter.entities.Currency;
 import com.stepanov.democonverter.repositories.CurrencyRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -26,6 +27,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Locale;
 
+@Slf4j
 @Component
 public class DataBaseInit {
 
@@ -87,6 +89,8 @@ public class DataBaseInit {
         CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
         URL xmlUrl = new URL((url));
         InputStream in = xmlUrl.openStream();
+        log.info("Loading xml by url: {}",xmlUrl);
         return builder.parse(in);
     }
+
 }

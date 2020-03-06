@@ -1,10 +1,7 @@
 package com.stepanov.democonverter.dto;
 
 import com.stepanov.democonverter.entities.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -21,5 +18,6 @@ public class CurrencyExchangeDto {
     private double sourceCount;
     private double targetCount;
     private LocalDate creationDate;
+    @ToString.Exclude
     private User user;
 }

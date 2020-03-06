@@ -1,9 +1,6 @@
 package com.stepanov.democonverter.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,6 +18,7 @@ public class User {
 
     private String login;
     private String password;
+    @ToString.Exclude
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CurrencyExchange> exchangeList;
 

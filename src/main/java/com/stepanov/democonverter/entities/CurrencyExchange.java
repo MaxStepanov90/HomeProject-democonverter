@@ -1,9 +1,6 @@
 package com.stepanov.democonverter.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -25,6 +22,7 @@ public class CurrencyExchange {
     private double sourceCount;
     private double targetCount;
     private LocalDate creationDate;
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

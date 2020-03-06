@@ -14,7 +14,6 @@ public interface CurrencyExchangeService {
 
     CurrencyExchangeDto createCurrencyExchange(String sourceName, String targetName, double sourceCount, String login)
             throws SAXException, ParserConfigurationException, ParseException, IOException;
-
     List<CurrencyExchangeDto> getHistoryForCurrentUser(String login);
     CurrencyExchange getNewCurrencyExchange(String sourceName, String targetName, double sourceCount, String login);
     double getTargetCount(Currency firstCurrency, Currency secondCurrency, double sourceCount);
