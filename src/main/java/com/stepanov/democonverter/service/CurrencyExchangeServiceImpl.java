@@ -35,7 +35,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
     @Override
     public List<CurrencyExchangeDto> getHistoryForCurrentUser(String login) {
         List<CurrencyExchange> currencyExchangeList = currencyExchangeRepository.findByUserLogin(login);
-        log.info("Get HistoryForCurrencyExchangeList by UserLogin: {}", login);
+        log.info("Get HistoryForCurrencyUser by UserLogin: {}", login);
         return CurrencyExchangeMapper.CURRENCY_EXCHANGE_MAPPER.fromCurrencyExchangeList(currencyExchangeList);
     }
 
