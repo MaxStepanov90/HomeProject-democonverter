@@ -48,7 +48,7 @@ public class CurrencyController {
         String userLogin = user.getName();
         CurrencyExchangeDto currencyExchangeDto = currencyExchangeService.createCurrencyExchange(sourceName, targetName, sourceCount, userLogin);
         List<CurrencyExchangeDto> currencyExchangeDtoList = currencyExchangeService.getHistoryForCurrentUser(userLogin);
-        model.addAttribute("currencyexchanges", currencyExchangeDto);
+        model.addAttribute("currencyexchange", currencyExchangeDto);
         model.addAttribute("historycurrencyexchange", currencyExchangeDtoList);
         return "result";
     }

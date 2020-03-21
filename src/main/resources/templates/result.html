@@ -2,14 +2,14 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <link href="webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
     <!--    First-->
     <script type="text/javascript" src="webjars/jquery/3.4.1/dist/jquery.min.js"></script>
     <!--    Second-->
     <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Конвертер валют</title>
 </head>
 <body>
@@ -28,9 +28,9 @@
                 <div class="form-group col-md-5">
                     <label for="sourceName"></label>
                     <select class="form-control" id="sourceName" name="sourceName">
-                        <option th:value="${currencyexchanges.sourceCharCode}"
-                                th:text="#{${currencyexchanges.sourceCharCode + '(' + currencyexchanges.sourceName + ')'}}"
-                                th:selected="#{${currencyexchanges.sourceCharCode + '(' + currencyexchanges.sourceName + ')'}}">
+                        <option th:value="${currencyexchange.sourceCharCode}"
+                                th:text="#{${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}}"
+                                th:selected="#{${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}}">
                         </option>
                     </select>
                 </div>
@@ -38,9 +38,9 @@
                 <div class="form-group col-md-5">
                     <label for="targetName"></label>
                     <select class="form-control" id="targetName" name="targetName">
-                        <option th:value="${currencyexchanges.targetCharCode}"
-                                th:text="#{${currencyexchanges.targetCharCode + '(' + currencyexchanges.targetName + ')'}}"
-                                th:selected="#{${currencyexchanges.targetCharCode + '(' + currencyexchanges.targetName + ')'}}">
+                        <option th:value="${currencyexchange.targetCharCode}"
+                                th:text="#{${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}}"
+                                th:selected="#{${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}}">
                         </option>
                     </select>
                 </div>
@@ -50,12 +50,12 @@
                 <div class="form-group col-md-5">
                     <label for="sourceCount"></label>
                     <input type="number" class="form-control" id="sourceCount" name="sourceCount"
-                           th:value="${currencyexchanges.sourceCount}">
+                           th:value="${currencyexchange.sourceCount}">
                 </div>
                 <div class="form-group col-md-5">
                     <label for="targetCount"></label>
                     <input type="number" class="form-control" id="targetCount" name="targetCount"
-                           th:value="${currencyexchanges.targetCount}">
+                           th:value="${currencyexchange.targetCount}">
                 </div>
             </div>
             <a th:href="@{/}" class="btn btn-secondary">вернуться</a>

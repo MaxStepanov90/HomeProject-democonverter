@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+      lang="en">
 <head>
-    <link href="webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <meta charset="UTF-8"/>
+    <title>Авторизация</title>
+    <link href="webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
     <script type="text/javascript" src="webjars/jquery/3.4.1/dist/jquery.min.js"></script>
     <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <meta charset="UTF-8">
-    <title>Авторизация</title>
 </head>
 <body>
 <div class="container jumbotron text-center my-5  ">
@@ -21,12 +20,12 @@
                 <div class="form-group col ">
                     <label for="username"></label>
                     <input name="username" type="text" class="form-control text-center" id="username"
-                           placeholder="Логин">
+                           placeholder="Логин"/>
                 </div>
                 <div class="form-group col">
                     <label for="password"></label>
                     <input name="password" type="password" class="form-control text-center" id="password"
-                           placeholder="Пароль">
+                           placeholder="Пароль"/>
                 </div>
 
                 <button type="submit" class="btn btn-secondary">ВОЙТИ</button>
