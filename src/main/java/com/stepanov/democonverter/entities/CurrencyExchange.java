@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(schema = "public", name = "currency_exchange")
 public class CurrencyExchange {
     @Id
     @GeneratedValue

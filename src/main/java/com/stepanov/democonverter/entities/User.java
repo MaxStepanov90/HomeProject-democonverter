@@ -10,7 +10,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(schema = "public", name = "usr")
 public class User {
     @Id
     @GeneratedValue
@@ -19,7 +18,7 @@ public class User {
     private String login;
     private String password;
     @ToString.Exclude
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CurrencyExchange> exchangeList;
 
 }

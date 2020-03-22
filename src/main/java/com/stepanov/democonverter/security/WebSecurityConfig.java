@@ -33,13 +33,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login,/resources/**,/fonts/**,/img/**").permitAll()
+                .antMatchers("/login,/resources/**,/fonts/**,/img/**,/h2-console/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
                 .failureUrl("/login")
-                .defaultSuccessUrl("/",true)
+                .defaultSuccessUrl("/", true)
                 .and()
                 .logout().invalidateHttpSession(true)
                 .clearAuthentication(true)
@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/css/**", "/static/**", "/webjars/**");
+                .antMatchers("/resources/**", "/css/**", "/static/**", "/webjars/**","/h2-console/**");
     }
 }
 

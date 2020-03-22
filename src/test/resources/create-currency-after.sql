@@ -1,1 +1,1 @@
-delete from test.public.currency;
+delete from CURRENCY;

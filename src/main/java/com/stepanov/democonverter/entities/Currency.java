@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(schema = "public", name = "currency")
 public class Currency {
 
     @Id
