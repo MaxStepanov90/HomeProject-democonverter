@@ -29,8 +29,8 @@
                     <label for="sourceName"></label>
                     <select class="form-control" id="sourceName" name="sourceName">
                         <option th:value="${currencyexchange.sourceCharCode}"
-                                th:text="#{${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}}"
-                                th:selected="#{${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}}">
+                                th:text="${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}"
+                                th:selected="${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}">
                         </option>
                     </select>
                 </div>
@@ -39,8 +39,8 @@
                     <label for="targetName"></label>
                     <select class="form-control" id="targetName" name="targetName">
                         <option th:value="${currencyexchange.targetCharCode}"
-                                th:text="#{${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}}"
-                                th:selected="#{${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}}">
+                                th:text="${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}"
+                                th:selected="${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}">
                         </option>
                     </select>
                 </div>
@@ -80,7 +80,7 @@
                 <select id="sourceHistoryExchange" name="sourceHistoryExchange" class="form-control">
                     <option th:each="historyexchange:${historycurrencyexchange}"
                             th:value="${historyexchange.sourceCharCode}"
-                            th:text="#{${historyexchange.sourceCharCode}}">
+                            th:text="${historyexchange.sourceCharCode}">
                     </option>
                 </select>
             </div>
@@ -89,7 +89,7 @@
                 <select id="targetHistoryExchange" name="targetHistoryExchange" class="form-control">
                     <option th:each="historyExchange: ${historycurrencyexchange}"
                             th:value="${historyExchange.targetCharCode}"
-                            th:text="#{${historyExchange.targetCharCode}}">
+                            th:text="${historyExchange.targetCharCode}">
                     </option>
                 </select>
             </div>
