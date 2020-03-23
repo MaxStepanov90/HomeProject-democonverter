@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
+    <meta charset="UTF-8"/>
+    <title>Конвертер валют</title>
+
     <link href="webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
     <!--    First-->
     <script type="text/javascript" src="webjars/jquery/3.4.1/dist/jquery.min.js"></script>
@@ -9,110 +11,94 @@
     <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
 
-    <meta charset="UTF-8"/>
-    <title>Конвертер валют</title>
 </head>
 <body>
 
 <div th:insert="fragments/navbar"></div>
 
-<div class="container jumbotron text-center my-5 ">
-    <div class="row justify-content-center align-items-center">
-
-        <form th:action="@{/convert}" method="get">
-
-            <div class="form-row justify-content-around">
-                <h1>Конвертер</h1>
-            </div>
+<div class="container">
+    <div class="jumbotron my-5">
+        <div class="container text-center">
+            <h1>Конвертер</h1>
             <div class="form-row justify-content-around">
                 <div class="form-group col-md-5">
-                    <label for="sourceName"></label>
-                    <select class="form-control" id="sourceName" name="sourceName">
-                        <option th:value="${currencyexchange.sourceCharCode}"
-                                th:text="${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}"
-                                th:selected="${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}">
-                        </option>
-                    </select>
+                    <label for="sourceName">Исходная валюта</label>
+                    <input type="text" class="form-control" id="sourceName" name="sourceName"
+                           th:value="${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}"/>
                 </div>
 
                 <div class="form-group col-md-5">
-                    <label for="targetName"></label>
-                    <select class="form-control" id="targetName" name="targetName">
-                        <option th:value="${currencyexchange.targetCharCode}"
-                                th:text="${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}"
-                                th:selected="${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}">
-                        </option>
-                    </select>
+                    <label for="targetName">Целевая валюта</label>
+                    <input type="text" class="form-control" id="targetName" name="targetName"
+                           th:value="${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}"/>
                 </div>
             </div>
 
             <div class="form-row justify-content-around">
-                <div class="form-group col-md-5">
-                    <label for="sourceCount"></label>
+                <div class="form-group col-5">
+                    <label for="sourceCount">Исходная сумма</label>
                     <input type="number" class="form-control" id="sourceCount" name="sourceCount"
-                           th:value="${currencyexchange.sourceCount}">
+                           th:value="${currencyexchange.sourceCount}"/>
                 </div>
-                <div class="form-group col-md-5">
-                    <label for="targetCount"></label>
+                <div class="form-group col-5">
+                    <label for="targetCount">Получаемая сумма</label>
                     <input type="number" class="form-control" id="targetCount" name="targetCount"
                            th:value="${currencyexchange.targetCount}">
                 </div>
             </div>
             <a th:href="@{/}" class="btn btn-secondary">вернуться</a>
-        </form>
-    </div>
-
-    <div class="jumbotron text-center my-5">
-
-
-        <div class="form-row justify-content-around">
-            <h3>История</h3>
         </div>
-        <div class="form-row justify-content-around">
-            <div class="form-group col-md-3">
-                <div>
-                    <label for="creationDate"></label>
-                    <input type="date" class="form-control" id="creationDate" name="creationDate">
+        <div class="container text-center mt-5">
+
+            <div class="form-row justify-content-around">
+                <h3>История</h3>
+            </div>
+            <div class="form-row justify-content-around">
+                <div class="form-group col-md-3">
+                    <div>
+                        <label for="exchangeDate"></label>
+                        <input type="date" class="form-control" id="exchangeDate" name="exchangeDate"/>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="sourceHistoryExchange"></label>
+                    <select id="sourceHistoryExchange" name="sourceHistoryExchange" class="form-control">
+                        <option th:each="historyExchange: ${historycurrencyexchange}"
+                                th:value="${historyExchange.sourceCharCode}"
+                                th:text="${historyExchange.sourceCharCode}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="targetHistoryExchange"></label>
+                    <select id="targetHistoryExchange" name="targetHistoryExchange" class="form-control">
+                        <option th:each="historyExchange: ${historycurrencyexchange}"
+                                th:value="${historyExchange.targetCharCode}"
+                                th:text="${historyExchange.targetCharCode}">
+                        </option>
+                    </select>
                 </div>
             </div>
-            <div class="form-group col-md-3">
-                <label for="sourceHistoryExchange"></label>
-                <select id="sourceHistoryExchange" name="sourceHistoryExchange" class="form-control">
-                    <option th:each="historyexchange:${historycurrencyexchange}"
-                            th:value="${historyexchange.sourceCharCode}"
-                            th:text="${historyexchange.sourceCharCode}">
-                    </option>
-                </select>
+            <div class="form-row justify-content-around">
+                <table class="table table-striped">
+                    <tr>
+                        <td>Исходная валюта</td>
+                        <td>Целевая валюта</td>
+                        <td>Исходная сумма</td>
+                        <td>Получаемая сумма</td>
+                        <td>Дата</td>
+                    </tr>
+                    <tr th:each="historyExchange:${historycurrencyexchange}">
+                        <td th:text="${historyExchange.sourceName}">Исходная валюта</td>
+                        <td th:text="${historyExchange.targetName}">Целевая валюта</td>
+                        <td th:text="${historyExchange.sourceCount}">Исходная сумма</td>
+                        <td th:text="${historyExchange.targetCount}">Получаемая сумма</td>
+                        <td th:text="${historyExchange.creationDate}">Дата</td>
+                    </tr>
+                </table>
             </div>
-            <div class="form-group col-md-3">
-                <label for="targetHistoryExchange"></label>
-                <select id="targetHistoryExchange" name="targetHistoryExchange" class="form-control">
-                    <option th:each="historyExchange: ${historycurrencyexchange}"
-                            th:value="${historyExchange.targetCharCode}"
-                            th:text="${historyExchange.targetCharCode}">
-                    </option>
-                </select>
-            </div>
+            <button type="submit" class="btn btn-secondary">Поиск</button>
         </div>
-        <div class="form-row justify-content-around">
-            <table class="table table-striped">
-                <tr>
-                    <td>Исходная валюта</td>
-                    <td>Целевая валюта</td>
-                    <td>Исходная сумма</td>
-                    <td>Получаемая сумма</td>
-                    <td>Дата</td>
-                </tr>
-                <tr th:each="historyExchange:${historycurrencyexchange}">
-                    <td th:text="${historyExchange.sourceName}">Исходная валюта</td>
-                    <td th:text="${historyExchange.targetName}">Целевая валюта</td>
-                    <td th:text="${historyExchange.sourceCount}">Исходная сумма</td>
-                    <td th:text="${historyExchange.targetCount}">Получаемая сумма</td>
-                    <td th:text="${historyExchange.creationDate}">Дата</td>
-                </tr>
-            </table>
-        </div>
-        <button type="submit" class="btn btn-secondary">Поиск</button>
     </div>
 </div>
 </body>
