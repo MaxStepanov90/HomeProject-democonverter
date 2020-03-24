@@ -12,7 +12,8 @@ public interface CurrencyMapper {
 
     CurrencyMapper CURRENCY_MAPPER = Mappers.getMapper(CurrencyMapper.class);
 
-    List<CurrencyDto> fromCurrencyList(List<Currency> currencyList);
+    List<Currency> fromCurrencyDtoList(List<CurrencyDto> currencyDtoList);
 
+    List<CurrencyDto> fromCurrencyList(List<Currency> currencyList);
 }
 
