@@ -9,15 +9,12 @@
     <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container jumbotron text-center my-5  ">
-    <div class="row justify-content-center align-items-center">
-        <h1>Авторизация</h1>
-    </div>
-    <div class="row justify-content-center align-items-center">
-        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
-
+<div class="container jumbotron text-center my-5">
+    <h1>Авторизация</h1>
+    <div class="form-row justify-content-center">
+        <div class="col-md-4">
             <form th:action="@{/login}" method="post">
-                <div class="form-group col ">
+                <div class="form-group col">
                     <label for="username"></label>
                     <input name="username" type="text" class="form-control text-center" id="username"
                            placeholder="Логин"/>
@@ -27,10 +24,9 @@
                     <input name="password" type="password" class="form-control text-center" id="password"
                            placeholder="Пароль"/>
                 </div>
-
                 <button type="submit" class="btn btn-secondary">ВОЙТИ</button>
-
             </form>
+            <a th:href="@{/registration}">регистрация</a>
         </div>
     </div>
 </div>

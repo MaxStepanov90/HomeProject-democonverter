@@ -43,8 +43,9 @@ public class CurrencyController {
     public String getCurrencyExchange(Model model, Principal user,
                                       @RequestParam String sourceName,
                                       @RequestParam String targetName,
-                                      @RequestParam double sourceCount) {
-        log.info("RequestParam from '/convert': sourceName: {}, targetName: {}, sourceCount: {}",sourceName,targetName,sourceCount);
+                                      @RequestParam double sourceCount)
+    {
+        log.info("RequestParam from '/convert': sourceName: {}, targetName: {}, sourceCount: {}", sourceName, targetName, sourceCount);
         String userLogin = user.getName();
         CurrencyExchangeDto currencyExchangeDto = currencyExchangeService.createCurrencyExchange(sourceName, targetName, sourceCount, userLogin);
         List<CurrencyExchangeDto> currencyExchangeDtoList = currencyExchangeService.getHistoryForCurrentUser(userLogin);

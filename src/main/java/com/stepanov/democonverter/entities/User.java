@@ -14,11 +14,11 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-
     private String login;
     private String password;
+    private String email;
     @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CurrencyExchange> exchangeList;
-
 }
+

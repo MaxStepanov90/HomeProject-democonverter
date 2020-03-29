@@ -5,7 +5,6 @@ import com.stepanov.democonverter.entities.Currency;
 import com.stepanov.democonverter.entities.CurrencyExchange;
 import com.stepanov.democonverter.mapper.CurrencyExchangeMapper;
 import com.stepanov.democonverter.repositories.CurrencyExchangeRepository;
-import com.stepanov.democonverter.repositories.UserRepository;
 import com.stepanov.democonverter.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +19,15 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
     private final CurrencyServiceImpl currencyService;
     private final CurrencyExchangeRepository currencyExchangeRepository;
-    private final UserRepository userRepository;
+    private final UserServiceImpl userService;
     private DateUtils dateUtils;
 
     @Autowired
     public CurrencyExchangeServiceImpl(CurrencyServiceImpl currencyService, CurrencyExchangeRepository currencyExchangeRepository,
-                                       UserRepository userRepository, DateUtils dateUtils) {
+                                       UserServiceImpl userService, DateUtils dateUtils) {
         this.currencyService = currencyService;
         this.currencyExchangeRepository = currencyExchangeRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
         this.dateUtils = dateUtils;
     }
 
@@ -60,7 +59,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
                 .sourceCount(sourceCount)
                 .targetCount(getTargetCount(firstCurrency, secondCurrency, sourceCount))
                 .creationDate(LocalDate.now())
-                .user(userRepository.findByLogin(login))
+                .user(userService.findByLogin(login))
                 .build();
     }
 
