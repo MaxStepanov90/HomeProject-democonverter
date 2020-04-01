@@ -1,7 +1,6 @@
 package com.stepanov.democonverter.service;
 
 import com.stepanov.democonverter.entities.Currency;
-import com.stepanov.democonverter.mapper.CurrencyMapper;
 import com.stepanov.democonverter.repositories.CurrencyRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -66,7 +65,7 @@ public class CurrencyServiceImplTest {
     public void getCurrencies_Contain() {
         Currency newCurrency = new Currency();
         currencyRepository.save(newCurrency);
-        List<Currency> currencies = CurrencyMapper.CURRENCY_MAPPER.fromCurrencyDtoList(currencyService.getCurrencies());
+        List<Currency> currencies = currencyService.getCurrencies();
         assertThat(currencies.contains(newCurrency));
         verify(currencyRepository, times(1)).findAll();
     }

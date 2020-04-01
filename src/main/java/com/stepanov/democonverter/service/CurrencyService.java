@@ -1,6 +1,5 @@
 package com.stepanov.democonverter.service;
 
-import com.stepanov.democonverter.dto.CurrencyDto;
 import com.stepanov.democonverter.entities.Currency;
 
 import java.time.LocalDate;
@@ -10,5 +9,5 @@ public interface CurrencyService {
 
     Currency getCurrencyByCharCode(String charCode);
     LocalDate getLoadDateOfCurrency(String sourceName);
-    List<CurrencyDto> getCurrencies();
+    List<Currency> getCurrencies();
 }

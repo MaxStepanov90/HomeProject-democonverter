@@ -40,7 +40,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
     @Override
     public CurrencyExchangeDto createCurrencyExchange(String sourceName, String targetName, double sourceCount, String login) {
-        dateUtils.CheckDateOfLoadCurrency(currencyService.getLoadDateOfCurrency(sourceName));
+        dateUtils.checkDateOfLoadCurrency(currencyService.getLoadDateOfCurrency(sourceName));
         CurrencyExchange newCurrencyExchange = getNewCurrencyExchange(sourceName, targetName, sourceCount, login);
         log.info("newCurrencyExchange: {}", newCurrencyExchange);
         currencyExchangeRepository.save(newCurrencyExchange);

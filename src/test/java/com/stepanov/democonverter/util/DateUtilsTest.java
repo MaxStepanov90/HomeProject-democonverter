@@ -30,13 +30,13 @@ class DateUtilsTest {
 
     @Test
     void checkDateOfLoadCurrency_Should_Call_PostConstructMethod() throws SAXException, ParserConfigurationException, ParseException, IOException {
-        dateUtils.CheckDateOfLoadCurrency(LocalDate.parse("2000-10-10"));
+        dateUtils.checkDateOfLoadCurrency(LocalDate.parse("2000-10-10"));
         verify(dataBaseInit, times(1)).postConstruct();
     }
 
     @Test
     void checkDateOfLoadCurrency_Should_Not_Call_PostConstructMethod() throws SAXException, ParserConfigurationException, ParseException, IOException {
-        dateUtils.CheckDateOfLoadCurrency(LocalDate.now());
+        dateUtils.checkDateOfLoadCurrency(LocalDate.now());
         verify(dataBaseInit, times(0)).postConstruct();
     }
 

@@ -22,7 +22,7 @@ public class DateUtils {
         this.dataBaseInit = dataBaseInit;
     }
 
-    public void CheckDateOfLoadCurrency(LocalDate currencyLoadDate) {
+    public void checkDateOfLoadCurrency(LocalDate currencyLoadDate) {
 
         if (beforeToday(currencyLoadDate)) {
             try {
