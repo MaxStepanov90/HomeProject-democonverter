@@ -34,8 +34,12 @@ public class DataBaseInit {
     @Value("${currencies.service.url}")
     protected String currenciesServiceUrl;
 
-    @Autowired
     private CurrencyRepository currencyRepository;
+
+    @Autowired
+    public DataBaseInit(CurrencyRepository currencyRepository) {
+        this.currencyRepository = currencyRepository;
+    }
 
     @PostConstruct
     public void postConstruct() throws IOException, SAXException, ParserConfigurationException, ParseException {
@@ -87,9 +91,9 @@ public class DataBaseInit {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
-            URL xmlUrl = new URL((url));
-            InputStream in = xmlUrl.openStream();
-            log.info("Loading xml by url: {}", xmlUrl);
-            return builder.parse(in);
+        URL xmlUrl = new URL((url));
+        InputStream in = xmlUrl.openStream();
+        log.info("Loading xml by url: {}", xmlUrl);
+        return builder.parse(in);
     }
 }

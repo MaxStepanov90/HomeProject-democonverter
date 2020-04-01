@@ -20,5 +20,6 @@ public class User {
     @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CurrencyExchange> exchangeList;
+
 }
 

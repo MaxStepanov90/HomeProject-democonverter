@@ -24,9 +24,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestPropertySource("/application-test.properties")
 @Sql(value = {"/create-user-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/create-user-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
-public class UserControllerIntegrationTest {
+public class LoginIntegrationTest {
     @Autowired
     private UserController userController;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -44,8 +45,8 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    public void correctLoginTest() throws Exception {
-        mockMvc.perform(formLogin().user("a").password("1"))
+    public void validLoginCredentialsTest() throws Exception {
+        mockMvc.perform(formLogin().user("Alex").password("22222"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(authenticated())
@@ -53,7 +54,7 @@ public class UserControllerIntegrationTest {
     }
 
     @Test
-    public void badCredentials() throws Exception {
+    public void incorrectLoginCredentialsTest() throws Exception {
         mockMvc.perform(formLogin().user("George").password("2"))
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())

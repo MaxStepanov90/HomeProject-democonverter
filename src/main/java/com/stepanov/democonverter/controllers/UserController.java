@@ -35,7 +35,7 @@ public class UserController {
             return "registration";
         }
         userService.saveUser(userDto);
-        return "/login";
+        return "login";
     }
 
     @GetMapping("/login")

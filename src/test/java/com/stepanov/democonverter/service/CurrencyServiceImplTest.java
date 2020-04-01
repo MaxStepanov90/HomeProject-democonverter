@@ -12,11 +12,10 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
@@ -30,10 +29,12 @@ public class CurrencyServiceImplTest {
 
     @Test
     public void getCurrencyByCharCode_Should_Return_Currency() {
-        given(currencyRepository.findByCharCode("EUR")).willReturn(getNewCurrency());
+        Currency newCurrency = new Currency();
+        newCurrency.setCharCode("EUR");
+        when(currencyRepository.findByCharCode("EUR")).thenReturn(newCurrency);
         Currency currencyFromDb = currencyService.getCurrencyByCharCode("EUR");
-        assertThat(currencyFromDb).isNotNull();
-        assertThat(currencyFromDb.getCharCode()).isEqualTo("EUR");
+        assertNotNull(currencyFromDb);
+        assertEquals(currencyFromDb.getCharCode(), "EUR");
         verify(currencyRepository, times(1)).findByCharCode("EUR");
     }
 
@@ -43,41 +44,30 @@ public class CurrencyServiceImplTest {
         currencyService.getCurrencyByCharCode("EUR");
         verify(currencyRepository).findByCharCode(captor.capture());
         String argument = captor.getValue();
-        assertThat(argument).isEqualTo("EUR");
+        assertEquals(argument, "EUR");
     }
 
     @Test
-    public void getCurrencyByCharCode_Null_Currency() {
-        given(currencyRepository.findByCharCode("XXX")).willReturn(null);
-        assertThat(currencyService.getCurrencyByCharCode("XXX")).isNull();
+    public void getCurrencyByCharCode_Should_Return_Null_Currency() {
+        when(currencyRepository.findByCharCode("XXX")).thenReturn(null);
+        assertNull(currencyService.getCurrencyByCharCode("XXX"));
         verify(currencyRepository, times(1)).findByCharCode("XXX");
 
     }
 
     @Test(expected = Exception.class)
     public void getCurrencyByCharCode_Should_Throw_Exception() {
-        given(currencyRepository.findByCharCode(anyString())).willThrow(Exception.class);
+        when(currencyRepository.findByCharCode(anyString())).thenThrow(Exception.class);
         currencyService.getCurrencyByCharCode("USD");
         verify(currencyRepository, times(1)).findByCharCode("XXX");
     }
 
     @Test
     public void getCurrencies_Contain() {
-        Currency newCurrency = getNewCurrency();
+        Currency newCurrency = new Currency();
         currencyRepository.save(newCurrency);
         List<Currency> currencies = CurrencyMapper.CURRENCY_MAPPER.fromCurrencyDtoList(currencyService.getCurrencies());
         assertThat(currencies.contains(newCurrency));
         verify(currencyRepository, times(1)).findAll();
-    }
-
-    public Currency getNewCurrency() {
-        return Currency.builder()
-                .Identity("R042")
-                .charCode("EUR")
-                .name("Евро")
-                .nominal(1)
-                .value(85.5)
-                .loadDate(LocalDate.now())
-                .build();
     }
 }

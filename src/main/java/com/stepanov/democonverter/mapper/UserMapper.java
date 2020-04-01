@@ -10,6 +10,7 @@ import org.mapstruct.factory.Mappers;
 public interface UserMapper {
     UserMapper USER_MAPPER = Mappers.getMapper(UserMapper.class);
 
+    User fromUserDto(UserDto userDto);
     @Mapping(target = "verifyPassword", ignore = true)
     UserDto fromUser(User user);
 

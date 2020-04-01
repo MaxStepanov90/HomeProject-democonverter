@@ -16,7 +16,6 @@ public class CurrencyExchangeDto {
     private String targetCharCode;
     private String sourceName;
     private String targetName;
-    @NotEmpty(message = "поле не может быть пустым")
     private double sourceCount;
     private double targetCount;
     private LocalDate creationDate;

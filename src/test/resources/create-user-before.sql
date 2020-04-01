@@ -2,9 +2,9 @@ delete
 from CURRENCY_EXCHANGE;
 delete
 from USER;
-insert into USER (id, login, password)
-values (1, 'a', '1'),
-       (2, 'b', '2');
+insert into USER (id, login, email, password)
+values (1, 'Max', 'mu5cool@yandex.ru', '$2y$12$JqTrBjOUdluWhgHQJUp5jOHXsFSJ47tsX9rBw.Up/MvB9tO7RIaj6'),
+       (2, 'Alex', 'alex@mail.ru', '$2y$12$eCKFh6FW0YEP2bYcUg8VOuzKaiZZ0QWyrq.8fweaCpOZmc/smAw3O');
 
 insert into CURRENCY_EXCHANGE
 values (1, '2020-03-19', 'EUR', 11, 'Евро', 'USD', 11.98, 'Доллар США', 1),
