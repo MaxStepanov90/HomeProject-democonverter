@@ -5,6 +5,7 @@ import com.stepanov.democonverter.repositories.CurrencyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,6 +30,7 @@ import java.util.Locale;
 
 @Slf4j
 @Component
+@PropertySource("classpath:exchange.properties")
 public class DataBaseInit {
 
     @Value("${currencies.service.url}")

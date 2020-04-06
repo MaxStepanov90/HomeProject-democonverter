@@ -1,7 +1,7 @@
 delete
-from CURRENCY_EXCHANGE;
-delete
 from USER;
+delete
+from CURRENCY_EXCHANGE;
 insert into USER (id, login, email, password)
 values (1, 'Max', 'mu5cool@yandex.ru', '$2y$12$JqTrBjOUdluWhgHQJUp5jOHXsFSJ47tsX9rBw.Up/MvB9tO7RIaj6'),
        (2, 'Alex', 'alex@mail.ru', '$2y$12$eCKFh6FW0YEP2bYcUg8VOuzKaiZZ0QWyrq.8fweaCpOZmc/smAw3O');
@@ -12,4 +12,6 @@ values (1, '2020-03-19', 'EUR', 11, 'Евро', 'USD', 11.98, 'Доллар СШ
        (3, '2020-03-19', 'AMD', 1213, 'Армянских драмов', 'AUD', 39791.61, 'Австралийский доллар', 1);
 
 alter sequence hibernate_sequence restart with 4;
+
+
 
