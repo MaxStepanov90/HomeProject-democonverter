@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 @Component
 public class UserDtoValidator implements Validator {
 
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService;
 
     @Autowired
     public UserDtoValidator(UserServiceImpl userService) {

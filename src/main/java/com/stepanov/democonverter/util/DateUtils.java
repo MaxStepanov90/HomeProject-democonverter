@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Component
 public class DateUtils {
 
-    private DataBaseInit dataBaseInit;
+    private final DataBaseInit dataBaseInit;
 
     @Autowired
     public DateUtils(DataBaseInit dataBaseInit) {

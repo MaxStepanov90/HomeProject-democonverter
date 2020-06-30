@@ -10,6 +10,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "usr")
 public class User {
     @Id
     @GeneratedValue

@@ -20,7 +20,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
     private final CurrencyServiceImpl currencyService;
     private final CurrencyExchangeRepository currencyExchangeRepository;
     private final UserServiceImpl userService;
-    private DateUtils dateUtils;
+    private final DateUtils dateUtils;
 
     @Autowired
     public CurrencyExchangeServiceImpl(CurrencyServiceImpl currencyService, CurrencyExchangeRepository currencyExchangeRepository,

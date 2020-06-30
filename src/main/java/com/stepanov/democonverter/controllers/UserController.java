@@ -14,8 +14,8 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 
-    private UserServiceImpl userService;
-    private UserDtoValidator userDtoValidator;
+    private final UserServiceImpl userService;
+    private final UserDtoValidator userDtoValidator;
 
     @Autowired
     public UserController(UserServiceImpl userService, UserDtoValidator userDtoValidator) {

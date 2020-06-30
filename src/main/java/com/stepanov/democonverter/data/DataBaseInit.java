@@ -36,7 +36,7 @@ public class DataBaseInit {
     @Value("${currencies.service.url}")
     protected String currenciesServiceUrl;
 
-    private CurrencyRepository currencyRepository;
+    private final CurrencyRepository currencyRepository;
 
     @Autowired
     public DataBaseInit(CurrencyRepository currencyRepository) {

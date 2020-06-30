@@ -1,2 +1,2 @@
 delete from CURRENCY_EXCHANGE;
-delete from USER ;
+delete from USR ;
