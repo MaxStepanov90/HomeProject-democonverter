@@ -3,30 +3,31 @@
       lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <title>Авторизация</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Конвертер валют</title>
     <link href="webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
     <script type="text/javascript" src="webjars/jquery/3.4.1/dist/jquery.min.js"></script>
     <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
-<body>
-<div class="container jumbotron text-center my-5">
-    <h1>Авторизация</h1>
+<body style="background-color: darkgrey">
+<div class="container-fluid text-center my-5">
+    <h1>Конвертер валют</h1>
     <div class="form-row justify-content-center">
         <div class="col-md-4">
             <form th:action="@{/login}" method="post">
-                <div class="form-group col">
+                <div class="form-group flex-column">
                     <label for="username"></label>
                     <input name="username" type="text" class="form-control text-center" id="username"
                            placeholder="Логин"/>
                 </div>
-                <div class="form-group col">
+                <div class="form-group flex-column">
                     <label for="password"></label>
                     <input name="password" type="password" class="form-control text-center" id="password"
                            placeholder="Пароль"/>
                 </div>
-                <button type="submit" class="btn btn-secondary">ВОЙТИ</button>
+                <button type="submit" class="btn btn-secondary btn-lg">ВОЙТИ</button>
             </form>
-            <a th:href="@{/registration}">регистрация</a>
+            <a class="mt-5" th:href="@{/registration}"><h4>зарегистрироваться</h4></a>
         </div>
     </div>
 </div>

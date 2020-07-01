@@ -2,78 +2,50 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Конвертер валют</title>
-
     <link href="webjars/bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet"/>
-    <!--    First-->
     <script type="text/javascript" src="webjars/jquery/3.4.1/dist/jquery.min.js"></script>
-    <!--    Second-->
     <script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{js/main.js}" src="../static/js/main.js"></script>
-
 </head>
-<body>
+<body style="background-color: darkgrey">
 
 <div th:insert="fragments/navbar"></div>
-<div class="container jumbotron my-5">
+<div class="container-fluid my-5">
     <div class="container text-center">
-        <h1>Конвертер</h1>
+        <h1>Конвертер валют</h1>
         <div class="form-row justify-content-around">
-            <div class="form-group col-md-5">
+            <div class="form-group col-sm-12 col-md-5 col-lg-5">
                 <label for="sourceName">Исходная валюта</label>
                 <input type="text" class="form-control" id="sourceName" name="sourceName"
                        th:value="${currencyexchange.sourceCharCode + '(' + currencyexchange.sourceName + ')'}"/>
             </div>
 
-            <div class="form-group col-md-5">
+            <div class="form-group col-sm-12 col-md-5 col-lg-5">
                 <label for="targetName">Целевая валюта</label>
                 <input type="text" class="form-control" id="targetName" name="targetName"
                        th:value="${currencyexchange.targetCharCode + '(' + currencyexchange.targetName + ')'}"/>
             </div>
 
-            <div class="form-group col-5">
+            <div class="form-group col-sm-12 col-md-5 col-lg-5">
                 <label for="sourceCount">Исходная сумма</label>
                 <input type="number" class="form-control" id="sourceCount" name="sourceCount"
                        th:value="${currencyexchange.sourceCount}"/>
             </div>
-            <div class="form-group col-5">
+            <div class="form-group col-sm-12 col-md-5 col-lg-5">
                 <label for="targetCount">Получаемая сумма</label>
                 <input type="number" class="form-control" id="targetCount" name="targetCount"
                        th:value="${currencyexchange.targetCount}">
             </div>
         </div>
-        <a th:href="@{/}" class="btn btn-secondary">вернуться</a>
+        <a th:href="@{/}" class="btn btn-secondary btn-lg">вернуться</a>
     </div>
 
     <div class="container text-center mt-5">
-        <h3>История</h3>
+        <h3>История конвертаций</h3>
         <div class="form-row justify-content-around">
-            <div class="form-group col-md-3">
-                <div>
-                    <label for="exchangeDate"></label>
-                    <input type="date" class="form-control" id="exchangeDate" name="exchangeDate"/>
-                </div>
-            </div>
-            <div class="form-group col-md-3">
-                <label for="sourceHistoryExchange"></label>
-                <select id="sourceHistoryExchange" name="sourceHistoryExchange" class="form-control">
-                    <option th:each="historyExchange: ${historycurrencyexchange}"
-                            th:value="${historyExchange.sourceCharCode}"
-                            th:text="${historyExchange.sourceCharCode}">
-                    </option>
-                </select>
-            </div>
-            <div class="form-group col-md-3">
-                <label for="targetHistoryExchange"></label>
-                <select id="targetHistoryExchange" name="targetHistoryExchange" class="form-control">
-                    <option th:each="historyExchange: ${historycurrencyexchange}"
-                            th:value="${historyExchange.targetCharCode}"
-                            th:text="${historyExchange.targetCharCode}">
-                    </option>
-                </select>
-            </div>
-
-            <table class="table table-striped">
+            <table class="table table-responsive table-striped">
                 <tr>
                     <td>Исходная валюта</td>
                     <td>Целевая валюта</td>
@@ -90,7 +62,6 @@
                 </tr>
             </table>
         </div>
-        <button type="submit" class="btn btn-secondary">Поиск</button>
     </div>
 </div>
 </body>
